@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_3
-
 #include "b1cp_terminal.h"
 #include <conio.h>
 #include <string.h>

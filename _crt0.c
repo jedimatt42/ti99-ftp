@@ -29,19 +29,6 @@ void _start(void)
     __asm__("\tli sp, %0" : : "i" (&__STACK_TOP) );
   }
 
-  // Fill .data section with initial values
-  {
-    extern int __LOAD_DATA;
-    extern int __DATA_START;
-    extern int __DATA_END;
-    char *src = (char*)&__LOAD_DATA;
-    char *dst = (char*)&__DATA_START;
-    while(dst < (char*)&__DATA_END)
-    {
-      *dst++ = *src++;
-    }
-  } 
-
   /* Init .bss section to all zeros-0x0000 */
   {
     extern int __BSS_START;

@@ -6,8 +6,4 @@ extern unsigned char PAT127;
 
 void defineChars();
 
-#include "banking.h"
-
-DECLARE_BANKED_VOID(defineChars, BANK_3, bk_defineChars, (), ())
-
 #endif

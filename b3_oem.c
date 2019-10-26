@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_3
-
 #include "b3_oem.h"
 #include <vdp.h>
 

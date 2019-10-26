@@ -5,7 +5,7 @@ LIBTI99?=/home/matthew/dev/github/jedimatt42/libti99
 OBJCOPY=tms9900-objcopy
 OBJDUMP=tms9900-objdump
 
-FNAME=FCMD
+FNAME=FORCEFTP
 UCFNAME=$(shell echo -n $(FNAME) | tr 'a-z' 'A-Z')
 
 LDFLAGS=\
@@ -21,67 +21,7 @@ OBJECT_LIST:=$(OBJECT_LIST:.asm=.o)
 
 LINK_OBJECTS:=$(addprefix objects/,$(OBJECT_LIST))
 
-all: $(FNAME)C.bin $(FNAME)G.bin
-
-# The size of the cart_rom segment in decimal
-# must agree with linkfile
-COMMON_SIZE = 112
-
-HEADBIN:=objects/header.bin
-
-$(HEADBIN): $(FNAME).elf
-	$(OBJCOPY) -O binary -j .text $< $(HEADBIN)
-	@dd if=/dev/null of=$(HEADBIN) bs=$(COMMON_SIZE) seek=1
-
-objects/libti99_tmp: $(FNAME).elf
-	$(OBJCOPY) -O binary -j .libti99 $< $@
-
-bank0.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .data $< objects/data.bin_tmp
-	$(OBJCOPY) -O binary -j .bank0 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp objects/data.bin_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank1.bin: $(FNAME).elf $(HEADBIN) objects/libti99_tmp
-	$(OBJCOPY) -O binary -j .bank1 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp objects/libti99_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank2.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank2 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank3.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank3 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank4.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank4 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank5.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank5 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank6.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank6 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-bank7.bin: $(FNAME).elf $(HEADBIN)
-	$(OBJCOPY) -O binary -j .bank7 $< objects/$@_tmp
-	cat $(HEADBIN) objects/$@_tmp >$@
-	@dd if=/dev/null of=$@ bs=8192 seek=1
-
-$(FNAME)C.bin: bank0.bin bank1.bin bank2.bin bank3.bin bank4.bin bank5.bin bank6.bin bank7.bin
-	cat $^ >$@
-
-$(FNAME)G.bin: gpl-boot.g99
-	xga99.py -D "CART=$(shell echo -n '>' ; grep _cart mapfile | cut -f2 -d'x' | cut -c13-16)" -o $@ $<
+all: $(FNAME).elf
 
 $(FNAME).elf: $(OBJECT_LIST)
 	$(LD) $(LINK_OBJECTS) $(LDFLAGS) -o $(FNAME).elf -Map=mapfile

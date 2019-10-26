@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_2
-
 #include "commands.h"
 #include "b1cp_terminal.h"
 #include <string.h>

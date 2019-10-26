@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_7
-
 #include "commands.h"
 #include "b7_ti_socket.h"
 #include "b1cp_strutil.h"
@@ -61,7 +58,7 @@ void handleFtp() {
   while(1) {
     tputs("ftp> ");
     strset(commandbuf, 0, 120);
-    bk_getstr(5, conio_y, commandbuf, displayWidth - 3, backspace);
+    getstr(5, conio_y, commandbuf, displayWidth - 3, backspace);
     tputc('\n');
     enable_more();
     char* tok = strtok(commandbuf, " ");
@@ -95,7 +92,7 @@ void handleFtp() {
       } else if (!strcmpi("lcd", tok)) {
         ftpLcd();
       } else if (!strcmpi("ldir", tok)) {
-        bk_handleDir();
+        handleDir();
       } else {
         tputs("Error, unknown command.\n");
       }
@@ -140,7 +137,7 @@ void ftpOpen() {
       char login[20];
       strset(login, 0, 20);
       tputs("login: ");
-      bk_getstr(7, conio_y, login, 20, backspace);
+      getstr(7, conio_y, login, 20, backspace);
       tputc('\n');
       code = sendFtpCommand("USER", login);
     }
@@ -150,7 +147,7 @@ void ftpOpen() {
       strset(passwd, 0, 20);
       tputs("password: ");
       int y = conio_y;
-      bk_getstr(10, y, passwd, 20, backspace);
+      getstr(10, y, passwd, 20, backspace);
       int plen = strlen(passwd);
 
       for(int i=0; i<plen; i++) {
@@ -240,7 +237,7 @@ void ftpGet() {
   tputs(tiname);
   tputs("\n");
   
-  unsigned char unit = bk_path2unitmask(currentPath);
+  unsigned char unit = path2unitmask(currentPath);
 
   sendFtpCommand("TYPE", "I");
   unsigned int port = sendFtpPasv();
@@ -262,11 +259,11 @@ void ftpGet() {
       memcpy(&(addInfoPtr->first_sector), &(tifiles->sectors), 8);
 
       tputs("setdir: "); tputs(currentPath); tputs("\n");
-      int ferr = bk_lvl2_setdir(currentDsr->crubase, unit, currentPath);
+      int ferr = lvl2_setdir(currentDsr->crubase, unit, currentPath);
       if (ferr) {
         tputs("Error, could not set directory\n");
       } else {
-        ferr = bk_lvl2_output(currentDsr->crubase, unit, tiname, 0, addInfoPtr);
+        ferr = lvl2_output(currentDsr->crubase, unit, tiname, 0, addInfoPtr);
         if (ferr) {
           tputs("Error, could not output file\n");
         } else {
@@ -280,7 +277,7 @@ void ftpGet() {
             // }
             vdpmemcpy(VDPFBUF, block, 256);
             addInfoPtr->first_sector = secno++;
-            ferr = bk_lvl2_output(currentDsr->crubase, unit, tiname, 1, addInfoPtr);
+            ferr = lvl2_output(currentDsr->crubase, unit, tiname, 1, addInfoPtr);
             if (ferr) {
               tputs("Error, failed to write block\n");
             } else {
@@ -302,9 +299,9 @@ void ftpGet() {
       strcat(fullfilename, tiname);
 
       struct PAB pab;
-      int ferr = bk_dsr_open(currentDsr, &pab, fullfilename, DSR_TYPE_DISPLAY | DSR_TYPE_FIXED | DSR_TYPE_OUTPUT | DSR_TYPE_SEQUENTIAL, 128);
+      int ferr = dsr_open(currentDsr, &pab, fullfilename, DSR_TYPE_DISPLAY | DSR_TYPE_FIXED | DSR_TYPE_OUTPUT | DSR_TYPE_SEQUENTIAL, 128);
       while (len > 0 && !ferr) {
-        ferr = bk_dsr_write(currentDsr, &pab, block, 128);
+        ferr = dsr_write(currentDsr, &pab, block, 128);
         if (ferr) {
           tputs("Error, writing file\n");
           // should probably send an abort command.
@@ -315,7 +312,7 @@ void ftpGet() {
         len = readstream(1, 128);
         tputs("\rread "); tputs(int2str(len)); tputs(" bytes of data\n");
       }
-      if (bk_dsr_close(currentDsr, &pab)) {
+      if (dsr_close(currentDsr, &pab)) {
         tputs("Error, closing file\n");
         return;
       }
@@ -465,7 +462,7 @@ int isTiFiles(struct TiFiles* tifiles) {
 }
 
 void ftpLcd() {
-  bk_handleCd();
+  handleCd();
   tputs("local dir: ");
   tputs(uint2hex(currentDsr->crubase));
   tputc('.');

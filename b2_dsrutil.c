@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_2
-
 #include "b0_globals.h"
 #include "b0_main.h"
 #include "b2_dsrutil.h"

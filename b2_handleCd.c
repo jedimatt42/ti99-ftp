@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_2
-
 #include "b1cp_strutil.h"
 #include "b0_parsing.h"
 #include "b0_globals.h"
@@ -11,7 +8,7 @@
 void handleCd() {
   struct DeviceServiceRoutine* dsr = 0;
   char path[256];
-  bk_parsePathParam(&dsr, path, PR_REQUIRED);
+  parsePathParam(&dsr, path, PR_REQUIRED);
   if (dsr == 0) {
     tputs("no path: drive or folder specified\n");
     return;

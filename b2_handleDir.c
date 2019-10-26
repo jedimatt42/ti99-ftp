@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_2
-
 #include "commands.h"
 
 
@@ -36,7 +33,7 @@ void handleDir() {
   }
 
   char path[256];
-  bk_parsePathParam(&dsr, path, PR_OPTIONAL | PR_WILDCARD);
+  parsePathParam(&dsr, path, PR_OPTIONAL | PR_WILDCARD);
   if (dsr == 0) {
     return;
   }
@@ -89,7 +86,7 @@ const char* file_types[] = {
 };
 
 void onLongDirEntry(struct DirEntry* dirEntry) {
-  if (!bk_globMatches(dirEntry->name)) {
+  if (!globMatches(dirEntry->name)) {
     return;
   }
   tputs(dirEntry->name);
@@ -126,7 +123,7 @@ void onWideVolInfo(struct VolInfo* volInfo) {
 }
 
 void onWideDirEntry(struct DirEntry* dirEntry) {
-  if (!bk_globMatches(dirEntry->name)) {
+  if (!globMatches(dirEntry->name)) {
     return;
   }
   int collimit = displayWidth / 11;

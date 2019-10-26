@@ -40,16 +40,4 @@ unsigned char __attribute__((noinline)) direct_io(int crubase, char unit, char o
 unsigned int __attribute__((noinline)) subroutine(int crubase, unsigned char operation);
 void __attribute__((noinline)) call_lvl2(int crubase, unsigned char operation);
 
-#include "banking.h"
-
-DECLARE_BANKED(path2unitmask, BANK_2, unsigned int, bk_path2unitmask, (char* currentPath), (currentPath))
-
-DECLARE_BANKED(lvl2_setdir, BANK_2, unsigned int, bk_lvl2_setdir, (int crubase, int unit, char* path), (crubase, unit, path))
-DECLARE_BANKED(lvl2_protect, BANK_2, unsigned int, bk_lvl2_protect, (int crubase, int unit, char* filename, int protect), (crubase, unit, filename, protect))
-DECLARE_BANKED(lvl2_rename, BANK_2, unsigned int, bk_lvl2_rename, (int crubase, int unit, char* oldname, char* newname), (crubase, unit, oldname, newname))
-DECLARE_BANKED(lvl2_rendir, BANK_2, unsigned int, bk_lvl2_rendir, (int crubase, int unit, char* oldname, char* newname), (crubase, unit, oldname, newname))
-DECLARE_BANKED(lvl2_rmdir, BANK_2, unsigned int, bk_lvl2_rmdir, (int crubase, int unit, char* dirname), (crubase, unit, dirname))
-DECLARE_BANKED(lvl2_input, BANK_2, unsigned int, bk_lvl2_input, (int crubase, int unit, char* filename, unsigned int blockcount, struct AddInfo* addInfoPtr), (crubase, unit, filename, blockcount, addInfoPtr))
-DECLARE_BANKED(lvl2_output, BANK_2, unsigned int, bk_lvl2_output, (int crubase, int unit, char* filename, unsigned int blockcount, struct AddInfo* addInfoPtr), (crubase, unit, filename, blockcount, addInfoPtr))
-
 #endif

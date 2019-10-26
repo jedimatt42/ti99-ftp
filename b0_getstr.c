@@ -1,6 +1,3 @@
-#include "banks.h"
-#define MYBANK BANK_0
-
 #include "b0_getstr.h"
 #include <conio.h>
 #include <string.h>

@@ -13,10 +13,4 @@ int parsePath(char* path, char* devicename);
 void parsePathParam(struct DeviceServiceRoutine** dsr, char* buffer, int requirements);
 int globMatches(char* filename);
 
-#include "banking.h"
-
-DECLARE_BANKED_VOID(handleCommand, BANK_0, bk_handleCommand, (char* buffer), (buffer))
-DECLARE_BANKED_VOID(parsePathParam, BANK_0, bk_parsePathParam, (struct DeviceServiceRoutine** dsr, char* buffer, int requirements), (dsr, buffer, requirements))
-DECLARE_BANKED(globMatches, BANK_0, int, bk_globMatches, (char* filename), (filename))
-
 #endif
