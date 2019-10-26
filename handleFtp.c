@@ -1,10 +1,10 @@
 #include "commands.h"
-#include "b7_ti_socket.h"
-#include "b1cp_strutil.h"
-#include "b1cp_terminal.h"
-#include "b0_globals.h"
-#include "b0_getstr.h"
-#include "b2_lvl2.h"
+#include "ti_socket.h"
+#include "strutil.h"
+#include "terminal.h"
+#include "globals.h"
+#include "getstr.h"
+#include "lvl2.h"
 #include <conio.h>
 #include <string.h>
 

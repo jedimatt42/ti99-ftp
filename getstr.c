@@ -1,8 +1,8 @@
-#include "b0_getstr.h"
+#include "getstr.h"
 #include <conio.h>
 #include <string.h>
 #include <kscan.h>
-#include "b1cp_strutil.h"
+#include "strutil.h"
 
 static unsigned char mycgetc();
 #define CUR_OVERWRITE 219

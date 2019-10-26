@@ -1,10 +1,10 @@
-#include "b0_parsing.h"
-#include "b0_main.h"
-#include "b0_globals.h"
+#include "parsing.h"
+#include "main.h"
+#include "globals.h"
 #include "commands.h"
-#include "b2_dsrutil.h"
-#include "b1cp_strutil.h"
-#include "b1cp_terminal.h"
+#include "dsrutil.h"
+#include "strutil.h"
+#include "terminal.h"
 #include <string.h>
 
 #define MATCH(x,y) (!(strcmpi(x,y)))

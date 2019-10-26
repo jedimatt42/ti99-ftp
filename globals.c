@@ -1,4 +1,4 @@
-#include "b0_globals.h"
+#include "globals.h"
 
 struct DeviceServiceRoutine* currentDsr;
 char currentPath[256];

@@ -1,4 +1,4 @@
-#include "b1cp_terminal.h"
+#include "terminal.h"
 #include <conio.h>
 #include <string.h>
 

@@ -1,4 +1,4 @@
-#include "b2_tifloat.h"
+#include "tifloat.h"
  
 int ti_floatToInt(unsigned char* bytes) {
   if (bytes[0] == 8) {

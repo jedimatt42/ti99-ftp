@@ -1,5 +1,5 @@
-#include "b7_ti_socket.h"
-#include "b7_tipi_msg.h"
+#include "ti_socket.h"
+#include "tipi_msg.h"
 #include <string.h>
 
 #define TI_SOCKET_REQUEST 0x22

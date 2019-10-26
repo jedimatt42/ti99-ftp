@@ -1,7 +1,7 @@
 #ifndef _GLOBALS_H
 #define _GLOBALS_H 1
 
-#include "b2_dsrutil.h"
+#include "dsrutil.h"
 
 extern struct DeviceServiceRoutine* currentDsr;
 extern struct DeviceServiceRoutine* scriptDsr;

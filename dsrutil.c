@@ -1,10 +1,10 @@
-#include "b0_globals.h"
-#include "b0_main.h"
-#include "b2_dsrutil.h"
-#include "b2_mds_dsrlnk.h"
-#include "b2_tifloat.h"
-#include "b1cp_strutil.h"
-#include "b1cp_terminal.h"
+#include "globals.h"
+#include "main.h"
+#include "dsrutil.h"
+#include "mds_dsrlnk.h"
+#include "tifloat.h"
+#include "strutil.h"
+#include "terminal.h"
 #include <vdp.h>
 #include <string.h>
 

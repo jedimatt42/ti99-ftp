@@ -1,8 +1,8 @@
 #include "commands.h"
 
-#include "b0_main.h"
-#include "b1cp_strutil.h"
-#include "b1cp_terminal.h"
+#include "main.h"
+#include "strutil.h"
+#include "terminal.h"
 #include <string.h>
 
 void handleWidth() {

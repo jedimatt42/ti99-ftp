@@ -1,11 +1,11 @@
 #include "commands.h"
 
 
-#include "b0_globals.h"
-#include "b0_parsing.h"
-#include "b1cp_strutil.h"
-#include "b2_dsrutil.h"
-#include "b1cp_terminal.h"
+#include "globals.h"
+#include "parsing.h"
+#include "strutil.h"
+#include "dsrutil.h"
+#include "terminal.h"
 #include <string.h>
 
 void onLongVolInfo(struct VolInfo* volInfo);

@@ -1,8 +1,8 @@
-#include "b2_lvl2.h"
-#include "b2_dsrutil.h"
-#include "b2_mds_dsrlnk.h"
-#include "b1cp_strutil.h"
-#include "b1cp_terminal.h"
+#include "lvl2.h"
+#include "dsrutil.h"
+#include "mds_dsrlnk.h"
+#include "strutil.h"
+#include "terminal.h"
 
 #include <string.h>
 #include <vdp.h>

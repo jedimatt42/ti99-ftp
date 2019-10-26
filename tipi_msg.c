@@ -1,4 +1,4 @@
-#include "b7_tipi_msg.h"
+#include "tipi_msg.h"
 
 
 #define GPLWS_R0 *((volatile unsigned int*)0x83E0) 

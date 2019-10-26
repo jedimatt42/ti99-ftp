@@ -1,10 +1,10 @@
 #include "commands.h"
-#include "b1cp_terminal.h"
+#include "terminal.h"
 #include <string.h>
-#include "b1cp_strutil.h"
-#include "b0_globals.h"
-#include "b2_dsrutil.h"
-#include "b2_lvl2.h"
+#include "strutil.h"
+#include "globals.h"
+#include "dsrutil.h"
+#include "lvl2.h"
 
 void handleMkdir() {
   char* dirname = strtok(0, " ");

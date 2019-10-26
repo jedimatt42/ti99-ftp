@@ -1,17 +1,17 @@
-#include "b0_main.h"
+#include "main.h"
 
-#include "b0_getstr.h"
-#include "b0_parsing.h"
-#include "b0_globals.h"
-#include "b1cp_strutil.h"
-#include "b2_dsrutil.h"
-#include "b3_oem.h"
+#include "getstr.h"
+#include "parsing.h"
+#include "globals.h"
+#include "strutil.h"
+#include "dsrutil.h"
+#include "oem.h"
 #include <sound.h>
 #include <string.h>
 #include <vdp.h>
 #include <conio.h>
 #include <kscan.h>
-#include "b1cp_terminal.h"
+#include "terminal.h"
 #include "commands.h"
 
 #define APP_VER "1.0"

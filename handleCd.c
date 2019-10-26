@@ -1,8 +1,8 @@
-#include "b1cp_strutil.h"
-#include "b0_parsing.h"
-#include "b0_globals.h"
+#include "strutil.h"
+#include "parsing.h"
+#include "globals.h"
 #include "commands.h"
-#include "b1cp_terminal.h"
+#include "terminal.h"
 #include <string.h>
 
 void handleCd() {
