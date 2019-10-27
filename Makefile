@@ -21,10 +21,17 @@ OBJECT_LIST:=$(OBJECT_LIST:.asm=.o)
 
 LINK_OBJECTS:=$(addprefix objects/,$(OBJECT_LIST))
 
-all: $(FNAME).elf
+all: $(UCFNAME)
 
-$(FNAME).elf: $(OBJECT_LIST)
+$(FNAME).elf: $(LINK_OBJECTS)
 	$(LD) $(LINK_OBJECTS) $(LDFLAGS) -o $(FNAME).elf -Map=mapfile
+
+$(UCFNAME): $(FNAME).elf
+	rm -f upper.bin lower.bin objects/FORCEFT? FORCEFT?.tfi
+	$(OBJCOPY) -O binary -j .text $< upper.bin
+	$(OBJCOPY) -O binary -j .data $< lower.bin
+	python ./ea5split.py A000:upper.bin 2000:lower.bin objects/$(UCFNAME)
+	xdm99.py -T objects/FORCEFT? -f PROGRAM
 
 .phony clean:
 	rm -fr objects
@@ -32,11 +39,12 @@ $(FNAME).elf: $(OBJECT_LIST)
 	rm -f *.bin
 	rm -f mapfile
 
-%.o: %.asm
+objects/%.o: %.asm
 	mkdir -p objects
-	cd objects; $(GAS) ../$< -o $@
+	$(GAS) $< -o $@
 
-%.o: %.c
+objects/%.o: %.c
 	mkdir -p objects
-	cd objects; $(CC) -c ../$< $(CFLAGS) -I/home/matthew/dev/gcc-9900/lib/gcc/tms9900/4.4.0/include -o $@
+	$(CC) -c $< $(CFLAGS) -I/home/matthew/dev/gcc-9900/lib/gcc/tms9900/4.4.0/include -o $@
+	mv *.i *.s objects/
 

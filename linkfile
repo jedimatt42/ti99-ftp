@@ -18,7 +18,9 @@ SECTIONS
   } >upper_exp
 
   .data : {
+    __DATA_START = .;     /* _crt0 will initialize RAM from here to __BSS_END to 0x00 values */
     * (.data); 
+    __DATA_END = .;
   } >lower_exp
 
   .bss  ALIGN(2) : { 
@@ -27,8 +29,8 @@ SECTIONS
     __BSS_END = .;
   } >lower_exp
 
-  __STACK_TOP = 0xFF00;
+  __STACK_TOP = 0x4000;
 
-  __STATS_CODE = SIZEOF(.text);
-  __STATS_RAM = SIZEOF(.bss) + SIZEOF(.data);
+  __STATS_LOWER_USAGE = SIZEOF(.data) + SIZEOF(.bss);
+  __STATS_UPPER_USAGE = SIZEOF(.text);
 }  
