@@ -10,10 +10,7 @@ SECTIONS
 {
   /* common */
   .text : {              /* place all code in upper 24k mem expansion */
-    objcts/*.o(.text)
-  } >upper_exp
-
-  .libti99 : {
+    objects/*.o(.text)
     libti99.a(.text)     /* vdp routines from libti99 */
   } >upper_exp
 

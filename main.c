@@ -6,7 +6,6 @@
 #include "strutil.h"
 #include "dsrutil.h"
 #include "oem.h"
-#include <sound.h>
 #include <string.h>
 #include <vdp.h>
 #include <conio.h>
@@ -44,10 +43,10 @@ void resetF18A() {
 }
 
 void setupScreen(int width) {
-  resetF18A();
+  //resetF18A();
   if (width == 80) {
     displayWidth = 80;
-    set_text80_color();
+    set_text80();
   } else { // 40 is the only other allowed value.
     displayWidth = 40;
     set_text();
@@ -78,11 +77,9 @@ void titleScreen() {
 
 void main()
 {
-  MUTE_SOUND();
-
   foreground = 15;
   background = 4;
-  setupScreen(isF18A() ? 80 : 40);
+  setupScreen(40);
 
   loadDriveDSRs();
   titleScreen();

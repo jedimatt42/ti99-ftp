@@ -21,7 +21,7 @@ OBJECT_LIST:=$(OBJECT_LIST:.asm=.o)
 
 LINK_OBJECTS:=$(addprefix objects/,$(OBJECT_LIST))
 
-all: $(UCFNAME)
+all: $(UCFNAME).DSK
 
 $(FNAME).elf: $(LINK_OBJECTS)
 	$(LD) $(LINK_OBJECTS) $(LDFLAGS) -o $(FNAME).elf -Map=mapfile
@@ -34,11 +34,18 @@ $(UCFNAME): $(FNAME).elf
 	xdm99.py -T objects/FORCEFT? -f PROGRAM
 	for i in objects/FORCEFT?.tfi; do cp $$i `basename $$i .tfi`; done
 
+$(UCFNAME).DSK: $(UCFNAME)
+	rm -f $(UCSNAME).DSK
+	xdm99.py $(UCFNAME).DSK --initialize DSDD40T
+	xdm99.py $(UCFNAME).DSK -t -a FORCEFT?
+	xdm99.py $(UCFNAME).DSK
+
 .phony clean:
 	rm -fr objects
 	rm -f *.elf
 	rm -f *.bin
 	rm -f mapfile
+	rm -f *.DSK
 
 objects/%.o: %.asm
 	mkdir -p objects
