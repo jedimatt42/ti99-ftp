@@ -32,6 +32,7 @@ $(UCFNAME): $(FNAME).elf
 	$(OBJCOPY) -O binary -j .data $< lower.bin
 	python ./ea5split.py A000:upper.bin 2000:lower.bin objects/$(UCFNAME)
 	xdm99.py -T objects/FORCEFT? -f PROGRAM
+	for i in objects/FORCEFT?.tfi; do cp $$i `basename $$i .tfi`; done
 
 .phony clean:
 	rm -fr objects

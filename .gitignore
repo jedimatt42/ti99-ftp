@@ -7,3 +7,4 @@ objects
 *.elf
 mapfile
 .vscode
+FORCEFT*
